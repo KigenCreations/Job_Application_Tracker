@@ -162,7 +162,12 @@ http://127.0.0.1:5000
 
 You should now be able to access CareerTrack and its main features.
 
+## Project Demonstration Video
 
+Watch the CareerTrack final project demonstration here:
+
+[CareerTrack Video Demonstration]
+https://youtu.be/_xAJMnbDN7M 
 
 
 
