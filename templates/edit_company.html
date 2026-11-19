@@ -1,47 +1,68 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>CareerTrack | Edit Company</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-    <h1>CareerTrack</h1>
-    <h2>Edit Company</h2>
+{% block title %}CareerTrack | Edit Company{% endblock %}
 
-    <!-- Form to update an existing company -->
+{% block content %}
+
+<h2>Edit Company</h2>
+<p>Update the company information below.</p>
+
+<div class="form-card">
     <form action="{{ url_for('edit_company', company_id=company.company_id) }}"
           method="POST">
 
-        <label for="company_name">Company Name:</label>
-        <input type="text" id="company_name" name="company_name"
-               value="{{ company.company_name }}" required>
+        <div class="form-grid">
 
-        <label for="industry">Industry:</label>
-        <input type="text" id="industry" name="industry"
-               value="{{ company.industry or '' }}">
+            <div class="form-group">
+                <label for="company_name">Company Name</label>
+                <input type="text" id="company_name"
+                       name="company_name"
+                       value="{{ company.company_name }}"
+                       required>
+            </div>
 
-        <label for="website">Website:</label>
-        <input type="text" id="website" name="website"
-               value="{{ company.website or '' }}">
+            <div class="form-group">
+                <label for="industry">Industry</label>
+                <input type="text" id="industry"
+                       name="industry"
+                       value="{{ company.industry or '' }}">
+            </div>
 
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city"
-               value="{{ company.city or '' }}">
+            <div class="form-group">
+                <label for="website">Website</label>
+                <input type="text" id="website"
+                       name="website"
+                       value="{{ company.website or '' }}">
+            </div>
 
-        <label for="state">State:</label>
-        <input type="text" id="state" name="state"
-               value="{{ company.state or '' }}">
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city"
+                       name="city"
+                       value="{{ company.city or '' }}">
+            </div>
 
-        <label for="notes">Notes:</label>
-        <textarea id="notes" name="notes">{{ company.notes or '' }}</textarea>
+            <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" id="state"
+                       name="state"
+                       value="{{ company.state or '' }}">
+            </div>
 
-        <button type="submit">Save Changes</button>
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea id="notes"
+                          name="notes">{{ company.notes or '' }}</textarea>
+            </div>
+
+        </div>
+
+        <div class="form-actions">
+            <button type="submit">Save Changes</button>
+            <a href="{{ url_for('companies') }}" class="cancel-btn">Cancel</a>
+        </div>
+
     </form>
+</div>
 
-    <p>
-        <a href="{{ url_for('companies') }}">Back to Companies</a>
-    </p>
-
-</body>
-</html>
+{% endblock %}

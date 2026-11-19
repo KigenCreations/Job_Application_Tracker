@@ -1,73 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>CareerTrack | Edit Contact</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-<h1>CareerTrack</h1>
+{% block title %}CareerTrack | Edit Contact{% endblock %}
+
+{% block content %}
+
 <h2>Edit Contact</h2>
+<p>Update the contact information below.</p>
 
 <form method="POST">
 
-    <p>
-        <label for="company_id">Company:</label>
-        <select id="company_id" name="company_id" required>
-            {% for company in companies %}
-                <option value="{{ company.company_id }}"
-                    {% if company.company_id == contact.company_id %}selected{% endif %}>
-                    {{ company.company_name }}
-                </option>
-            {% endfor %}
-        </select>
-    </p>
+    <div class="form-grid">
 
-    <p>
-        <label for="contact_name">Contact Name:</label>
-        <input type="text" id="contact_name"
-               name="contact_name"
-               value="{{ contact.contact_name }}"
-               required>
-    </p>
+        <div class="form-group">
+            <label for="company_id">Company</label>
+            <select id="company_id" name="company_id" required>
+                {% for company in companies %}
+                    <option value="{{ company.company_id }}"
+                        {% if company.company_id == contact.company_id %}selected{% endif %}>
+                        {{ company.company_name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
 
-    <p>
-        <label for="title">Job Title:</label>
-        <input type="text" id="title"
-               name="title"
-               value="{{ contact.title or '' }}">
-    </p>
+        <div class="form-group">
+            <label for="contact_name">Contact Name</label>
+            <input type="text" id="contact_name"
+                   name="contact_name"
+                   value="{{ contact.contact_name }}"
+                   required>
+        </div>
 
-    <p>
-        <label for="email">Email:</label>
-        <input type="email" id="email"
-               name="email"
-               value="{{ contact.email or '' }}">
-    </p>
+        <div class="form-group">
+            <label for="title">Job Title</label>
+            <input type="text" id="title"
+                   name="title"
+                   value="{{ contact.title or '' }}">
+        </div>
 
-    <p>
-        <label for="phone">Phone:</label>
-        <input type="tel" id="phone"
-               name="phone"
-               value="{{ contact.phone or '' }}">
-    </p>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email"
+                   name="email"
+                   value="{{ contact.email or '' }}">
+        </div>
 
-    <p>
-        <label for="linkedin_url">LinkedIn URL:</label>
-        <input type="url" id="linkedin_url"
-               name="linkedin_url"
-               value="{{ contact.linkedin_url or '' }}">
-    </p>
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone"
+                   name="phone"
+                   value="{{ contact.phone or '' }}">
+        </div>
 
-    <p>
-        <label for="notes">Notes:</label>
-        <textarea id="notes" name="notes" rows="3">{{ contact.notes or '' }}</textarea>
-    </p>
+        <div class="form-group">
+            <label for="linkedin_url">LinkedIn URL</label>
+            <input type="url" id="linkedin_url"
+                   name="linkedin_url"
+                   value="{{ contact.linkedin_url or '' }}">
+        </div>
 
-    <button type="submit">Save Changes</button>
-    <a href="{{ url_for('contacts') }}">Cancel</a>
+        <div class="form-group">
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes"
+                      rows="3">{{ contact.notes or '' }}</textarea>
+        </div>
+
+    </div>
+
+    <div class="form-actions">
+        <button type="submit">Save Changes</button>
+        <a href="{{ url_for('contacts') }}" class="cancel-btn">Cancel</a>
+    </div>
 
 </form>
 
-</body>
-</html>
+{% endblock %}
