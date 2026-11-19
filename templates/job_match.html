@@ -1,0 +1,80 @@
+
+{% extends "base.html" %}
+
+{% block title %}CareerTrack | Job Match{% endblock %}
+
+{% block content %}
+
+<h2>Job Match</h2>
+
+<p>Enter your skills to find jobs that match your experience.</p>
+
+<!-- Skill Search Form -->
+<form method="POST">
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label for="skills">Your Skills</label>
+            <input
+                type="text"
+                id="skills"
+                name="skills"
+                value="{{ entered_skills }}"
+                placeholder="Python, SQL, Git"
+                required
+            >
+        </div>
+
+        <div class="form-actions">
+            <button type="submit">Find Matches</button>
+        </div>
+
+    </div>
+</form>
+
+<hr>
+
+<!-- Matching Results -->
+{% if entered_skills %}
+
+    <h3>Matching Results</h3>
+
+    {% if matches %}
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Company</th>
+                    <th>Match Score</th>
+                    <th>Matched Skills</th>
+                    <th>Required Skills</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for match in matches %}
+                <tr>
+                    <td>{{ match.job_title }}</td>
+                    <td>{{ match.company_name }}</td>
+                    <td>{{ match.score }}%</td>
+                    <td>{{ match.matched_skills | join(', ') }}</td>
+                    <td>{{ match.required_skills | join(', ') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <p>No jobs with skill requirements were found.</p>
+    {% endif %}
+
+{% endif %}
+
+<hr>
+
+<p>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</p>
+
+{% endblock %}

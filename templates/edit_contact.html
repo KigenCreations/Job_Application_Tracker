@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CareerTrack | Edit Contact</title>
+</head>
+<body>
+
+<h1>CareerTrack</h1>
+<h2>Edit Contact</h2>
+
+<form method="POST">
+
+    <p>
+        <label for="company_id">Company:</label>
+        <select id="company_id" name="company_id" required>
+            {% for company in companies %}
+                <option value="{{ company.company_id }}"
+                    {% if company.company_id == contact.company_id %}selected{% endif %}>
+                    {{ company.company_name }}
+                </option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <p>
+        <label for="contact_name">Contact Name:</label>
+        <input type="text" id="contact_name"
+               name="contact_name"
+               value="{{ contact.contact_name }}"
+               required>
+    </p>
+
+    <p>
+        <label for="title">Job Title:</label>
+        <input type="text" id="title"
+               name="title"
+               value="{{ contact.title or '' }}">
+    </p>
+
+    <p>
+        <label for="email">Email:</label>
+        <input type="email" id="email"
+               name="email"
+               value="{{ contact.email or '' }}">
+    </p>
+
+    <p>
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone"
+               name="phone"
+               value="{{ contact.phone or '' }}">
+    </p>
+
+    <p>
+        <label for="linkedin_url">LinkedIn URL:</label>
+        <input type="url" id="linkedin_url"
+               name="linkedin_url"
+               value="{{ contact.linkedin_url or '' }}">
+    </p>
+
+    <p>
+        <label for="notes">Notes:</label>
+        <textarea id="notes" name="notes" rows="3">{{ contact.notes or '' }}</textarea>
+    </p>
+
+    <button type="submit">Save Changes</button>
+    <a href="{{ url_for('contacts') }}">Cancel</a>
+
+</form>
+
+</body>
+</html>

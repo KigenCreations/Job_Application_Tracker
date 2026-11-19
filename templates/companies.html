@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}CareerTrack | Companies{% endblock %}
+
+{% block content %}
+    <h2>Companies</h2>
+
+    <!-- Form to add a new company -->
+<h3>Add New Company</h3>
+
+
+<form action="{{ url_for('add_company') }}" method="POST">
+    <div class="form-grid">
+
+        <div class="form-group">
+            <label for="company_name">Company Name</label>
+            <input type="text" id="company_name"
+                   name="company_name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="industry">Industry</label>
+            <input type="text" id="industry" name="industry">
+        </div>
+
+        <div class="form-group">
+            <label for="website">Website</label>
+            <input type="url" id="website" name="website">
+        </div>
+
+        <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" id="city" name="city">
+        </div>
+
+        <div class="form-group">
+            <label for="state">State</label>
+            <input type="text" id="state" name="state">
+        </div>
+
+        <div class="form-group">
+            <label for="notes">Notes</label>
+            <textarea id="notes" name="notes" rows="3"></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit">Add Company</button>
+        </div>
+
+    </div>
+</form>
+
+<hr>
+    <p>Companies saved in our database:</p>
+
+    <!-- Display companies with delete buttons -->
+<ul>
+    <table>
+    <thead>
+        <tr>
+            <th>Company Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for company in companies %}
+        <tr>
+            <td>{{ company.company_name }}</td>
+
+            <td>
+                <div style="display: flex; gap: 10px; align-items: center;">
+
+                    <!-- Edit button -->
+                    <a class="action-edit"
+                       href="{{ url_for('edit_company', company_id=company.company_id) }}">
+                        Edit
+                    </a>
+
+                    <!-- Delete button -->
+                    <form class="delete-form"
+                          action="{{ url_for('delete_company', company_id=company.company_id) }}"
+                          method="POST"
+                          onsubmit="return confirm('Are you sure you want to delete this company?');">
+
+                        <button type="submit">Delete</button>
+                    </form>
+
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</ul>
+{% endblock %}

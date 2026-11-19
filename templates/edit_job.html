@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CareerTrack | Edit Job</title>
+</head>
+<body>
+
+    <h1>CareerTrack</h1>
+    <h2>Edit Job</h2>
+
+    <!-- Update an existing job -->
+    <form action="{{ url_for('edit_job', job_id=job.job_id) }}"
+          method="POST">
+
+        <label for="company_id">Company:</label>
+        <select id="company_id" name="company_id" required>
+            {% for company in companies %}
+                <option value="{{ company.company_id }}"
+                    {% if company.company_id == job.company_id %}selected{% endif %}>
+                    {{ company.company_name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="job_title">Job Title:</label>
+        <input type="text" id="job_title" name="job_title"
+               value="{{ job.job_title }}" required>
+
+        <label for="job_type">Job Type:</label>
+        <select id="job_type" name="job_type">
+            {% for type in ['Full-time', 'Part-time', 'Contract', 'Internship'] %}
+                <option value="{{ type }}"
+                    {% if job.job_type == type %}selected{% endif %}>
+                    {{ type }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label for="salary_min">Minimum Salary:</label>
+        <input type="number" id="salary_min" name="salary_min"
+               step="0.01" min="0"
+               value="{{ job.salary_min if job.salary_min is not none else '' }}">
+
+        <label for="salary_max">Maximum Salary:</label>
+        <input type="number" id="salary_max" name="salary_max"
+               step="0.01" min="0"
+               value="{{ job.salary_max if job.salary_max is not none else '' }}">
+
+        <label for="date_posted">Date Posted:</label>
+        <input type="date" id="date_posted" name="date_posted"
+               value="{{ job.date_posted or '' }}">
+
+        <label for="job_url">Job URL:</label>
+        <input type="text" id="job_url" name="job_url"
+               value="{{ job.job_url or '' }}">
+
+        <label for="job_description">Description:</label>
+        <textarea id="job_description" name="job_description">{{ job.job_description or '' }}</textarea>
+
+        <label for="requirements">Requirements:</label>
+        <textarea id="requirements" name="requirements">{{ job.requirements or '' }}</textarea>
+
+        <label for="is_active">Active:</label>
+        <input type="checkbox" id="is_active" name="is_active"
+               {% if job.is_active %}checked{% endif %}>
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <p>
+        <a href="{{ url_for('jobs') }}">Back to Jobs</a>
+    </p>
+
+</body>
+</html>

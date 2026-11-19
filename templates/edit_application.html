@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}CareerTrack | Edit Application{% endblock %}
+
+{% block content %}
+
+<h2>Edit Application</h2>
+<p>Update the details of your job application.</p>
+
+<div class="form-container">
+    <form method="POST" class="form-grid">
+
+        <div class="form-group">
+            <label for="job_id">Job</label>
+            <select id="job_id" name="job_id" required>
+                {% for job in jobs %}
+                    <option value="{{ job.job_id }}"
+                        {% if job.job_id == application.job_id %}selected{% endif %}>
+                        {{ job.job_title }} - {{ job.company_name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="application_date">Application Date</label>
+            <input type="date"
+                   id="application_date"
+                   name="application_date"
+                   value="{{ application.application_date }}"
+                   required>
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" name="status" required>
+                {% for status in ['Applied', 'Screening', 'Interview', 'Offer', 'Rejected', 'Withdrawn'] %}
+                    <option value="{{ status }}"
+                        {% if application.status == status %}selected{% endif %}>
+                        {{ status }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="resume_version">Resume Version</label>
+            <input type="text"
+                   id="resume_version"
+                   name="resume_version"
+                   value="{{ application.resume_version or '' }}">
+        </div>
+
+        <div class="form-group">
+            <label for="cover_letter_sent">Cover Letter Sent</label>
+            <input type="checkbox"
+                   id="cover_letter_sent"
+                   name="cover_letter_sent"
+                   {% if application.cover_letter_sent %}checked{% endif %}>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Save Changes</button>
+            <a href="{{ url_for('applications') }}" class="action-edit">
+                Cancel
+            </a>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}
