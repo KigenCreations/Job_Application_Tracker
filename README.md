@@ -78,20 +78,39 @@ Make sure the following software is installed:
 - MySQL Workbench (recommended)
 - Git
 
-### 2. Download the Project
+### 2. Download the Project from GitHub
 
-Clone the GitHub repository:
-
-```bash
-git clone YOUR_REPOSITORY_URL
-```
+- Open the CareerTrack GitHub repository.
+- Click the green Code button.
+- Select Download ZIP.
+- Save the ZIP file to your computer.
+- Extract (unzip) the downloaded file.
 
 Open the downloaded project folder:
 
-```bash
-cd COP4751_JobTracker
-```
 
+### 3. Open the Project in PyCharm
+
+- Open PyCharm.
+- Select File > Open.
+- Locate the extracted Job_Application_Tracker-main folder.
+- Select the folder and open it as a project.
+
+### 4. Set Up the Python Virtual Environment
+
+When the project opens, PyCharm may display a message indicating that no Python interpreter is configured.
+
+- Open requirements.txt.
+- Click Create a virtual environment using requirements.txt when prompted.
+- PyCharm will create a .venv folder and install the required Python packages.
+
+### Alternative: Manual Installation
+
+If PyCharm does not offer automatic setup, configure a Python interpreter and virtual environment first. Then open the PyCharm terminal and run:
+
+```bash
+python -m pip install -r requirements.txt
+```
 ### 3. Install Python Dependencies
 
 Create a virtual environment:
