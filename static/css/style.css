@@ -772,3 +772,26 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         grid-column: 1;
     }
 }
+
+/* Cancel Button Styling */
+.cancel-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: transparent;
+    color: #A78BFA;
+    border: 1px solid #A78BFA;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-left: 12px;
+}
+
+/* Cancel Button Hover Effect */
+.cancel-btn:hover {
+    background-color: #A78BFA;
+    color: #10101C;
+}
